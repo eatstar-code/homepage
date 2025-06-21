@@ -2,13 +2,108 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>EatStar 준비 중</title>
+  <title>EatStar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="EatStar 공식 홈페이지 - 개발 및 서비스 준비 중입니다.">
   <style>
-    body { text-align: center; font-family: sans-serif; padding-top: 100px; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #f0f0f0, #e0e0ff);
+      text-align: center;
+      color: #333;
+    }
+    header {
+      background-color: #4a60d4;
+      color: white;
+      padding: 2rem 1rem;
+    }
+    h1 {
+      margin-top: 1.5rem;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+    .lang-toggle {
+      margin: 1.5rem;
+    }
+    .lang-toggle button {
+      margin: 0 5px;
+      padding: 8px 16px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .links {
+      margin-top: 2.5rem;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .links a {
+      color: #4a60d4;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .links a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      margin-top: 3rem;
+      padding: 1rem;
+      background: #f9f9f9;
+      border-top: 1px solid #ccc;
+      font-size: 0.9rem;
+      color: #777;
+    }
   </style>
 </head>
 <body>
-  <h1>🚀 EatStar 서비스 준비 중입니다.</h1>
-  <p>곧 만나요!</p>
+
+  <header>
+    <h1 id="main-title">EatStar 서비스 준비 중입니다</h1>
+    <p id="subtitle">잠시만 기다려 주세요. 곧 멋진 모습으로 찾아뵙겠습니다.</p>
+  </header>
+
+  <div class="lang-toggle">
+    <button onclick="switchLang('ko')">한국어</button>
+    <button onclick="switchLang('en')">English</button>
+  </div>
+
+  <div class="links" id="link-section">
+    🔗 GitHub: <a href="https://github.com/eatstar-code" target="_blank">eatstar-code</a><br>
+    📧 Email: <a href="mailto:eatstar.code@gmail.com">eatstar.code@gmail.com</a><br>
+    📝 Blog: <a href="https://eatstar.tistory.com/" target="_blank">eatstar.tistory.com</a>
+  </div>
+
+  <footer>
+    &copy; 2025 EatStar. All rights reserved.
+  </footer>
+
+  <script>
+    function switchLang(lang) {
+      const title = document.getElementById('main-title');
+      const subtitle = document.getElementById('subtitle');
+      const linkSection = document.getElementById('link-section');
+
+      if (lang === 'ko') {
+        title.textContent = 'EatStar 서비스 준비 중입니다';
+        subtitle.textContent = '잠시만 기다려 주세요. 곧 멋진 모습으로 찾아뵙겠습니다.';
+        linkSection.innerHTML = `
+          🔗 GitHub: <a href="https://github.com/eatstar-code" target="_blank">eatstar-code</a><br>
+          📧 Email: <a href="mailto:eatstar.code@gmail.com">eatstar.code@gmail.com</a><br>
+          📝 Blog: <a href="https://eatstar.tistory.com/" target="_blank">eatstar.tistory.com</a>
+        `;
+      } else if (lang === 'en') {
+        title.textContent = 'EatStar is Coming Soon';
+        subtitle.textContent = 'We’re working on something awesome. Please stay tuned!';
+        linkSection.innerHTML = `
+          🔗 GitHub: <a href="https://github.com/eatstar-code" target="_blank">eatstar-code</a><br>
+          📧 Email: <a href="mailto:eatstar.code@gmail.com">eatstar.code@gmail.com</a><br>
+          📝 Blog: <a href="https://eatstar.tistory.com/" target="_blank">Visit our Tistory Blog</a>
+        `;
+      }
+    }
+  </script>
+
 </body>
 </html>
