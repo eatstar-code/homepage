@@ -8,12 +8,11 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
-    /* CSS Variables for Theming (Light & Dark Mode) */
     :root {
       --bg-color: #f4f7fc;
       --card-bg-color: #ffffff;
@@ -36,9 +35,9 @@
       --toggle-fg: #1e1e1e;
     }
 
-    /* General Styles */
     body {
-      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      /* 언어별로 적합한 폰트를 우선 적용 */
+      font-family: 'Poppins', 'Segoe UI', 'Noto Sans SC', 'Noto Sans TC', 'Noto Sans JP', sans-serif;
       margin: 0;
       padding: 2rem 1rem;
       background-color: var(--bg-color);
@@ -61,7 +60,6 @@
       transition: background-color 0.3s, box-shadow 0.3s;
     }
 
-    /* Header */
     .studio-logo {
       font-size: 2.5rem;
       font-weight: 700;
@@ -76,7 +74,6 @@
       margin-bottom: 2rem;
     }
 
-    /* App Showcase Section */
     .app-showcase {
       background-color: var(--bg-color);
       border-radius: 15px;
@@ -94,109 +91,133 @@
       height: 80px;
       border-radius: 16px;
       flex-shrink: 0;
-      /* 중요: 이 경로를 실제 앱 아이콘 이미지 파일로 교체해주세요! */
-      /* 예: images/gongju-app-icon.png */
-      background-color: #ddd; /* 아이콘 없을 때 배경색 */
+      background-color: #ddd;
+      object-fit: cover; /* 이미지가 비율에 맞게 채워지도록 */
     }
 
-    .app-info h3 {
-      margin: 0 0 0.5rem 0;
-      font-size: 1.5rem;
-      color: var(--heading-color);
-    }
+    .app-info h3 { margin: 0 0 0.5rem 0; font-size: 1.5rem; color: var(--heading-color); }
+    .app-info p { margin: 0; opacity: 0.9; }
 
-    .app-info p {
-      margin: 0;
-      opacity: 0.9;
-    }
-
-    .google-play-btn {
-      display: inline-block;
-      margin-top: 1.5rem;
-      transition: transform 0.2s ease;
-    }
+    .google-play-btn { display: inline-block; margin-top: 1.5rem; transition: transform 0.2s ease; }
+    .google-play-btn img { height: 50px; }
+    .google-play-btn:hover { transform: scale(1.05); }
     
-    .google-play-btn img {
-      height: 50px;
-    }
+    .social-links { margin-top: 2.5rem; display: flex; justify-content: center; gap: 1.5rem; }
+    .social-links a { color: var(--text-color); font-size: 1.8rem; transition: color 0.2s, transform 0.2s; }
+    .social-links a:hover { color: var(--primary-color); transform: translateY(-3px); }
 
-    .google-play-btn:hover {
-      transform: scale(1.05);
-    }
-    
-    /* Links Section */
-    .social-links {
-      margin-top: 2.5rem;
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-    }
-    
-    .social-links a {
-      color: var(--text-color);
-      font-size: 1.8rem;
-      transition: color 0.2s, transform 0.2s;
-    }
-
-    .social-links a:hover {
-      color: var(--primary-color);
-      transform: translateY(-3px);
-    }
-
-    /* Controls (Lang/Theme) */
+    /* Controls Section */
     .controls {
       position: absolute;
       top: 20px;
       right: 20px;
       display: flex;
       gap: 10px;
-      background-color: var(--card-bg-color);
-      padding: 8px;
-      border-radius: 20px;
-      box-shadow: 0 2px 10px var(--shadow-color);
+      z-index: 100;
     }
+
+    /* Language Switcher Dropdown */
+    .language-switcher { position: relative; }
     
-    .controls button {
-      background: none;
+    #lang-btn {
+      background-color: var(--card-bg-color);
+      border: none;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 10px var(--shadow-color);
+      color: var(--text-color);
+    }
+
+    .lang-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 45px;
+      background-color: var(--card-bg-color);
+      border-radius: 10px;
+      box-shadow: 0 4px 20px var(--shadow-color);
+      overflow: hidden;
+      padding: 5px 0;
+    }
+    .lang-menu.show { display: block; }
+
+    .lang-item {
+      display: block;
+      padding: 10px 20px;
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background-color 0.2s;
+      white-space: nowrap;
+    }
+    .lang-item:hover { background-color: var(--bg-color); }
+
+    #theme-toggle-btn {
+      background-color: var(--card-bg-color);
       border: none;
       cursor: pointer;
       font-size: 1rem;
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       color: var(--text-color);
-      transition: background-color 0.2s;
+      box-shadow: 0 2px 10px var(--shadow-color);
+      transition: background-color 0.2s, transform 0.2s;
     }
+    #theme-toggle-btn:hover { transform: scale(1.1); }
 
-    .controls button:hover {
-      background-color: var(--bg-color);
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: var(--text-color);
-      opacity: 0.6;
-    }
+    footer { margin-top: 2rem; font-size: 0.9rem; color: var(--text-color); opacity: 0.6; }
   </style>
 </head>
 <body>
 
   <div class="controls">
-    <button id="lang-btn" onclick="switchLang()">KO</button>
+    <div class="language-switcher">
+      <button id="lang-btn">KO</button>
+      <div id="lang-menu" class="lang-menu">
+        <a href="#" class="lang-item" data-lang="ko">한국어</a>
+        <a href="#" class="lang-item" data-lang="en">English</a>
+        <a href="#" class="lang-item" data-lang="ja">日本語</a>
+        <a href="#" class="lang-item" data-lang="zh-cn">简体中文</a>
+        <a href="#" class="lang-item" data-lang="zh-tw">繁體中文</a>
+      </div>
+    </div>
     <button id="theme-toggle-btn"><i class="fas fa-moon"></i></button>
   </div>
 
   <div class="container">
     <h1 class="studio-logo">EATSTAR STUDIO</h1>
-    <p class="subtitle" data-ko="창의적인 아이디어를 현실로 만듭니다." data-en="Bringing creative ideas to life."></p>
+    <p class="subtitle" 
+      data-ko="창의적인 아이디어를 현실로 만듭니다." 
+      data-en="Bringing creative ideas to life."
+      data-ja="創造的なアイデアを現実に。"
+      data-zh-cn="将创意变为现实。"
+      data-zh-tw="將創意變為現實。"></p>
 
     <div class="app-showcase">
-      <img src="YOUR_APP_ICON.png" alt="공주시간도감 앱 아이콘" class="app-icon">
+      <img src="icon_ko.png" alt="App Icon" class="app-icon" id="app-icon"
+        data-ko-src="icon_ko.png"
+        data-en-src="icon_en.png"
+        data-ja-src="icon_ja.png"
+        data-zh-cn-src="icon_zh-cn.png"
+        data-zh-tw-src="icon_zh-tw.png">
+      
       <div class="app-info">
-        <h3 data-ko="공주시간도감" data-en="Gongju Time Atlas"></h3>
-        <p data-ko="여행의 모든 순간을 기록하고 공유하세요." data-en="Record and share every moment of your journey."></p>
+        <h3 id="app-title"
+        data-ko="공주시간도감" 
+        data-en="Gongju Time Archive"
+        data-ja="コンジュ時間図鑑 – 公州歴史探訪"
+        data-zh-cn="公州时间图鉴"
+        data-zh-tw="公州時間圖鑑"></h3>
+        <p id="app-desc"
+          data-ko="여행의 모든 순간을 기록하고 공유하세요." 
+          data-en="Record and share every moment of your journey."
+          data-ja="旅のすべての瞬間を記録し、共有しましょう。"
+          data-zh-cn="记录并分享您旅途中的每一个瞬间。"
+          data-zh-tw="記錄並分享您旅途中的每一個瞬間。"></p>
       </div>
     </div>
 
@@ -206,20 +227,22 @@
 
     <div class="social-links">
       <a href="https://github.com/eatstar-code" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-      <a href="mailto:eatstar.code@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="mailto:eatstar.studio@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
       <a href="https://eatstar.tistory.com/" target="_blank" title="Tistory Blog"><i class="fas fa-blog"></i></a>
     </div>
 
     <footer>
-      &copy; 2025 EatStar. All rights reserved.
+      &copy; EATSTAR STUDIO 2025. All rights reserved.
     </footer>
   </div>
 
   <script>
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
     const langBtn = document.getElementById('lang-btn');
+    const langMenu = document.getElementById('lang-menu');
     const body = document.body;
-    
+    const appIcon = document.getElementById('app-icon');
+
     // 1. Theme Switcher
     themeToggleBtn.addEventListener('click', () => {
       body.classList.toggle('dark-mode');
@@ -229,25 +252,47 @@
     });
 
     // 2. Language Switcher
-    let currentLang = 'ko';
-    function switchLang() {
-        currentLang = (currentLang === 'ko') ? 'en' : 'ko';
-        updateText(currentLang);
-        langBtn.textContent = currentLang.toUpperCase();
-        localStorage.setItem('language', currentLang);
-    }
+    langBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // 이벤트 버블링 방지
+        langMenu.classList.toggle('show');
+    });
 
-    function updateText(lang) {
-      const elements = document.querySelectorAll('[data-ko]');
-      elements.forEach(el => {
-        el.textContent = el.dataset[lang];
-      });
+    document.querySelectorAll('.lang-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const selectedLang = this.dataset.lang;
+            updateLanguage(selectedLang);
+            langMenu.classList.remove('show');
+        });
+    });
+    
+    // 페이지의 다른 곳을 클릭하면 메뉴가 닫히도록 설정
+    window.addEventListener('click', function(e) {
+        if (!langBtn.contains(e.target)) {
+            langMenu.classList.remove('show');
+        }
+    });
+
+    function updateLanguage(lang) {
+        // 모든 텍스트 업데이트
+        document.querySelectorAll('[data-ko]').forEach(el => {
+            el.textContent = el.dataset[lang];
+        });
+        
+        // 앱 아이콘 업데이트
+        appIcon.src = appIcon.dataset[`${lang}Src`];
+        
+        // 현재 선택된 언어를 버튼에 표시
+        langBtn.textContent = lang.toUpperCase();
+        
+        // 선택된 언어 저장
+        localStorage.setItem('language', lang);
     }
 
     // 3. Load Saved Preferences on Page Load
     document.addEventListener('DOMContentLoaded', () => {
       // Load Theme
-      const savedTheme = localStorage.getItem('theme');
+      const savedTheme = localStorage.getItem('theme') || 'light';
       if (savedTheme === 'dark') {
         body.classList.add('dark-mode');
         themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
@@ -255,9 +300,7 @@
 
       // Load Language
       const savedLang = localStorage.getItem('language') || 'ko';
-      currentLang = savedLang;
-      updateText(currentLang);
-      langBtn.textContent = currentLang.toUpperCase();
+      updateLanguage(savedLang);
     });
   </script>
 
