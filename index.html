@@ -2,107 +2,263 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>EatStar</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="EatStar 공식 홈페이지 - 개발 및 서비스 준비 중입니다.">
+  <title>EATSTAR STUDIO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EATSTAR STUDIO 공식 홈페이지. '공주시간도감' 앱을 만나보세요.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <style>
+    /* CSS Variables for Theming (Light & Dark Mode) */
+    :root {
+      --bg-color: #f4f7fc;
+      --card-bg-color: #ffffff;
+      --text-color: #333333;
+      --heading-color: #1a237e;
+      --primary-color: #4a60d4;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --toggle-bg: #e0e0e0;
+      --toggle-fg: #ffffff;
+    }
+
+    body.dark-mode {
+      --bg-color: #121212;
+      --card-bg-color: #1e1e1e;
+      --text-color: #e0e0e0;
+      --heading-color: #bb86fc;
+      --primary-color: #90a4ff;
+      --shadow-color: rgba(0, 0, 0, 0.4);
+      --toggle-bg: #333;
+      --toggle-fg: #1e1e1e;
+    }
+
+    /* General Styles */
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
       margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom, #f0f0f0, #e0e0ff);
-      text-align: center;
-      color: #333;
-    }
-    header {
-      background-color: #4a60d4;
-      color: white;
       padding: 2rem 1rem;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
     }
-    h1 {
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+      background-color: var(--card-bg-color);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      padding: 2.5rem;
+      text-align: center;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    /* Header */
+    .studio-logo {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--heading-color);
+      margin: 0;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-color);
+      opacity: 0.8;
+      margin-bottom: 2rem;
+    }
+
+    /* App Showcase Section */
+    .app-showcase {
+      background-color: var(--bg-color);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: left;
+      transition: background-color 0.3s;
+    }
+    
+    .app-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      flex-shrink: 0;
+      /* 중요: 이 경로를 실제 앱 아이콘 이미지 파일로 교체해주세요! */
+      /* 예: images/gongju-app-icon.png */
+      background-color: #ddd; /* 아이콘 없을 때 배경색 */
+    }
+
+    .app-info h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.5rem;
+      color: var(--heading-color);
+    }
+
+    .app-info p {
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    .google-play-btn {
+      display: inline-block;
       margin-top: 1.5rem;
+      transition: transform 0.2s ease;
     }
-    p {
-      font-size: 1.2rem;
+    
+    .google-play-btn img {
+      height: 50px;
     }
-    .lang-toggle {
-      margin: 1.5rem;
+
+    .google-play-btn:hover {
+      transform: scale(1.05);
     }
-    .lang-toggle button {
-      margin: 0 5px;
-      padding: 8px 16px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    .links {
+    
+    /* Links Section */
+    .social-links {
       margin-top: 2.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    
+    .social-links a {
+      color: var(--text-color);
+      font-size: 1.8rem;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .social-links a:hover {
+      color: var(--primary-color);
+      transform: translateY(-3px);
+    }
+
+    /* Controls (Lang/Theme) */
+    .controls {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      background-color: var(--card-bg-color);
+      padding: 8px;
+      border-radius: 20px;
+      box-shadow: 0 2px 10px var(--shadow-color);
+    }
+    
+    .controls button {
+      background: none;
+      border: none;
+      cursor: pointer;
       font-size: 1rem;
-      line-height: 1.8;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      color: var(--text-color);
+      transition: background-color 0.2s;
     }
-    .links a {
-      color: #4a60d4;
-      text-decoration: none;
-      font-weight: bold;
+
+    .controls button:hover {
+      background-color: var(--bg-color);
     }
-    .links a:hover {
-      text-decoration: underline;
-    }
+
+    /* Footer */
     footer {
-      margin-top: 3rem;
-      padding: 1rem;
-      background: #f9f9f9;
-      border-top: 1px solid #ccc;
+      margin-top: 2rem;
       font-size: 0.9rem;
-      color: #777;
+      color: var(--text-color);
+      opacity: 0.6;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1 id="main-title">EatStar 서비스 준비 중입니다</h1>
-    <p id="subtitle">잠시만 기다려 주세요. 곧 멋진 모습으로 찾아뵙겠습니다.</p>
-  </header>
-
-  <div class="lang-toggle">
-    <button onclick="switchLang('ko')">한국어</button>
-    <button onclick="switchLang('en')">English</button>
+  <div class="controls">
+    <button id="lang-btn" onclick="switchLang()">KO</button>
+    <button id="theme-toggle-btn"><i class="fas fa-moon"></i></button>
   </div>
 
-  <div class="links" id="link-section">
-    🔗 GitHub: <a href="https://github.com/eatstar-code" target="_blank">eatstar-code</a><br>
-    📧 Email: <a href="mailto:eatstar.code@gmail.com">eatstar.code@gmail.com</a><br>
-    📝 Blog: <a href="https://eatstar.tistory.com/" target="_blank">eatstar.tistory.com</a>
-  </div>
+  <div class="container">
+    <h1 class="studio-logo">EATSTAR STUDIO</h1>
+    <p class="subtitle" data-ko="창의적인 아이디어를 현실로 만듭니다." data-en="Bringing creative ideas to life."></p>
 
-  <footer>
-    &copy; 2025 EatStar. All rights reserved.
-  </footer>
+    <div class="app-showcase">
+      <img src="YOUR_APP_ICON.png" alt="공주시간도감 앱 아이콘" class="app-icon">
+      <div class="app-info">
+        <h3 data-ko="공주시간도감" data-en="Gongju Time Atlas"></h3>
+        <p data-ko="여행의 모든 순간을 기록하고 공유하세요." data-en="Record and share every moment of your journey."></p>
+      </div>
+    </div>
+
+    <a href="https://play.google.com/store/apps/details?id=com.eatstar.sigandogam" target="_blank" class="google-play-btn">
+      <img src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드">
+    </a>
+
+    <div class="social-links">
+      <a href="https://github.com/eatstar-code" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="mailto:eatstar.code@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://eatstar.tistory.com/" target="_blank" title="Tistory Blog"><i class="fas fa-blog"></i></a>
+    </div>
+
+    <footer>
+      &copy; 2025 EatStar. All rights reserved.
+    </footer>
+  </div>
 
   <script>
-    function switchLang(lang) {
-      const title = document.getElementById('main-title');
-      const subtitle = document.getElementById('subtitle');
-      const linkSection = document.getElementById('link-section');
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    const langBtn = document.getElementById('lang-btn');
+    const body = document.body;
+    
+    // 1. Theme Switcher
+    themeToggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      const isDarkMode = body.classList.contains('dark-mode');
+      themeToggleBtn.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    });
 
-      if (lang === 'ko') {
-        title.textContent = 'EatStar 서비스 준비 중입니다';
-        subtitle.textContent = '잠시만 기다려 주세요. 곧 멋진 모습으로 찾아뵙겠습니다.';
-        linkSection.innerHTML = `
-          🔗 GitHub: <a href="https://github.com/eatstar-code" target="_blank">eatstar-code</a><br>
-          📧 Email: <a href="mailto:eatstar.code@gmail.com">eatstar.code@gmail.com</a><br>
-          📝 Blog: <a href="https://eatstar.tistory.com/" target="_blank">eatstar.tistory.com</a>
-        `;
-      } else if (lang === 'en') {
-        title.textContent = 'EatStar is Coming Soon';
-        subtitle.textContent = 'We’re working on something awesome. Please stay tuned!';
-        linkSection.innerHTML = `
-          🔗 GitHub: <a href="https://github.com/eatstar-code" target="_blank">eatstar-code</a><br>
-          📧 Email: <a href="mailto:eatstar.code@gmail.com">eatstar.code@gmail.com</a><br>
-          📝 Blog: <a href="https://eatstar.tistory.com/" target="_blank">Visit our Tistory Blog</a>
-        `;
-      }
+    // 2. Language Switcher
+    let currentLang = 'ko';
+    function switchLang() {
+        currentLang = (currentLang === 'ko') ? 'en' : 'ko';
+        updateText(currentLang);
+        langBtn.textContent = currentLang.toUpperCase();
+        localStorage.setItem('language', currentLang);
     }
+
+    function updateText(lang) {
+      const elements = document.querySelectorAll('[data-ko]');
+      elements.forEach(el => {
+        el.textContent = el.dataset[lang];
+      });
+    }
+
+    // 3. Load Saved Preferences on Page Load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load Theme
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+        themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+      }
+
+      // Load Language
+      const savedLang = localStorage.getItem('language') || 'ko';
+      currentLang = savedLang;
+      updateText(currentLang);
+      langBtn.textContent = currentLang.toUpperCase();
+    });
   </script>
 
 </body>
