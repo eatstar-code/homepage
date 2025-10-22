@@ -36,7 +36,6 @@
     }
 
     body {
-      /* 언어별로 적합한 폰트를 우선 적용 */
       font-family: 'Poppins', 'Segoe UI', 'Noto Sans SC', 'Noto Sans TC', 'Noto Sans JP', sans-serif;
       margin: 0;
       padding: 2rem 1rem;
@@ -60,19 +59,8 @@
       transition: background-color 0.3s, box-shadow 0.3s;
     }
 
-    .studio-logo {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--heading-color);
-      margin: 0;
-    }
-
-    .subtitle {
-      font-size: 1.1rem;
-      color: var(--text-color);
-      opacity: 0.8;
-      margin-bottom: 2rem;
-    }
+    .studio-logo { font-size: 2.5rem; font-weight: 700; color: var(--heading-color); margin: 0; }
+    .subtitle { font-size: 1.1rem; color: var(--text-color); opacity: 0.8; margin-bottom: 2rem; }
 
     .app-showcase {
       background-color: var(--bg-color);
@@ -92,7 +80,7 @@
       border-radius: 16px;
       flex-shrink: 0;
       background-color: #ddd;
-      object-fit: cover; /* 이미지가 비율에 맞게 채워지도록 */
+      object-fit: cover;
     }
 
     .app-info h3 { margin: 0 0 0.5rem 0; font-size: 1.5rem; color: var(--heading-color); }
@@ -106,17 +94,7 @@
     .social-links a { color: var(--text-color); font-size: 1.8rem; transition: color 0.2s, transform 0.2s; }
     .social-links a:hover { color: var(--primary-color); transform: translateY(-3px); }
 
-    /* Controls Section */
-    .controls {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      gap: 10px;
-      z-index: 100;
-    }
-
-    /* Language Switcher Dropdown */
+    .controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
     .language-switcher { position: relative; }
     
     #lang-btn {
@@ -143,7 +121,6 @@
       padding: 5px 0;
     }
     .lang-menu.show { display: block; }
-
     .lang-item {
       display: block;
       padding: 10px 20px;
@@ -170,6 +147,21 @@
     #theme-toggle-btn:hover { transform: scale(1.1); }
 
     footer { margin-top: 2rem; font-size: 0.9rem; color: var(--text-color); opacity: 0.6; }
+
+    /* 언어별 폰트 최적화 */
+    html[lang="zh-cn"] body,
+    html[lang="zh-cn"] h1,
+    html[lang="zh-cn"] h3,
+    html[lang="zh-cn"] p {
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+
+    html[lang="zh-tw"] body,
+    html[lang="zh-tw"] h1,
+    html[lang="zh-tw"] h3,
+    html[lang="zh-tw"] p {
+      font-family: 'Noto Sans TC', sans-serif;
+    }
   </style>
 </head>
 <body>
@@ -207,11 +199,11 @@
       
       <div class="app-info">
         <h3 id="app-title"
-        data-ko="공주시간도감" 
-        data-en="Gongju Time Archive"
-        data-ja="コンジュ時間図鑑 – 公州歴史探訪"
-        data-zh-cn="公州时间图鉴"
-        data-zh-tw="公州時間圖鑑"></h3>
+          data-ko="공주시간도감" 
+          data-en="Gongju Time Archive"
+          data-ja="コンジュ時間図鑑 – 公州歴史探訪"
+          data-zh-cn="公州时间图鉴"
+          data-zh-tw="公州時間圖鑑"></h3>
         <p id="app-desc"
           data-ko="여행의 모든 순간을 기록하고 공유하세요." 
           data-en="Record and share every moment of your journey."
@@ -253,7 +245,7 @@
 
     // 2. Language Switcher
     langBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // 이벤트 버블링 방지
+        e.stopPropagation();
         langMenu.classList.toggle('show');
     });
 
@@ -266,7 +258,6 @@
         });
     });
     
-    // 페이지의 다른 곳을 클릭하면 메뉴가 닫히도록 설정
     window.addEventListener('click', function(e) {
         if (!langBtn.contains(e.target)) {
             langMenu.classList.remove('show');
@@ -274,18 +265,16 @@
     });
 
     function updateLanguage(lang) {
-        // 모든 텍스트 업데이트
         document.querySelectorAll('[data-ko]').forEach(el => {
             el.textContent = el.dataset[lang];
         });
         
-        // 앱 아이콘 업데이트
+        document.documentElement.lang = lang;
+        
         appIcon.src = appIcon.dataset[`${lang}Src`];
         
-        // 현재 선택된 언어를 버튼에 표시
         langBtn.textContent = lang.toUpperCase();
         
-        // 선택된 언어 저장
         localStorage.setItem('language', lang);
     }
 
@@ -298,9 +287,23 @@
         themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
       }
 
-      // Load Language
-      const savedLang = localStorage.getItem('language') || 'ko';
-      updateLanguage(savedLang);
+      // Load Language with Browser Language Detection
+      let initialLang = localStorage.getItem('language');
+
+      if (!initialLang) {
+        const browserLang = navigator.language || navigator.userLanguage;
+        let detectedLang = 'ko';
+
+        if (browserLang.startsWith('en')) detectedLang = 'en';
+        else if (browserLang.startsWith('ja')) detectedLang = 'ja';
+        else if (browserLang.toLowerCase() === 'zh-cn') detectedLang = 'zh-cn';
+        else if (browserLang.toLowerCase().startsWith('zh')) detectedLang = 'zh-tw';
+        else if (browserLang.startsWith('ko')) detectedLang = 'ko';
+        
+        initialLang = detectedLang;
+      }
+      
+      updateLanguage(initialLang);
     });
   </script>
 
