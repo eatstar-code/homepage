@@ -220,6 +220,29 @@
       opacity: 0.6;
     }
 
+    /* === Kotlin/App pill badge === */
+    .tech-badges {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      line-height: 1;
+      padding: 3px 8px;      /* 글자보다 살짝만 크게 */
+      border-radius: 9999px; /* 양끝 둥근 필 모양 */
+      letter-spacing: 0.2px;
+    }
+    .badge-kotlin {
+      color: #fff;
+      background: linear-gradient(135deg, #7F52FF 0%, #C860FF 50%, #FF3D81 100%);
+      box-shadow: 0 6px 16px rgba(127, 82, 255, 0.25);
+    }
+
     /* 언어별 폰트 최적화 */
     html[lang="zh-cn"] body,
     html[lang="zh-cn"] h1,
@@ -292,6 +315,11 @@
           data-zh-cn="记录并分享您旅途中的每一个瞬间。"
           data-zh-tw="記錄並分享您旅途中的每一個瞬間。"
         ></p>
+
+        <!-- Kotlin/App 배지 -->
+        <div class="tech-badges" aria-label="Tech stack">
+          <span class="badge badge-kotlin" title="Kotlin App">Kotlin/App</span>
+        </div>
       </div>
     </div>
 
@@ -323,7 +351,7 @@
     const body = document.body;
     const appIcon = document.getElementById('app-icon');
 
-    // ========== 1) Theme Switcher ==========
+    // 1) Theme Switcher
     themeToggleBtn.addEventListener('click', () => {
       body.classList.toggle('dark-mode');
       const isDark = body.classList.contains('dark-mode');
@@ -331,7 +359,7 @@
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
 
-    // ========== 2) Language Switcher ==========
+    // 2) Language Switcher
     langBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       const expanded = langBtn.getAttribute('aria-expanded') === 'true';
@@ -357,12 +385,12 @@
       }
     });
 
-    // ========== 핵심: 언어 적용 (하이픈 포함 data-* 안전 접근) ==========
+    // 핵심: 언어 적용 (하이픈 포함 data-* 안전 접근)
     function updateLanguage(lang) {
-      // 1) 문서 lang 설정
+      // 문서 lang 설정
       document.documentElement.lang = lang;
 
-      // 2) 텍스트 교체: 원본 속성 이름 그대로 사용
+      // 텍스트 교체: 원본 속성 이름 그대로 사용
       document.querySelectorAll('[data-ko]').forEach((el) => {
         const val =
           el.getAttribute(`data-${lang}`) ||
@@ -371,38 +399,28 @@
         if (val != null) el.textContent = val;
       });
 
-      // 3) 아이콘 교체: data-<lang>-src
+      // 아이콘 교체: data-<lang>-src
       const iconSrc =
         appIcon.getAttribute(`data-${lang}-src`) ||
         appIcon.getAttribute('data-en-src') ||
         appIcon.getAttribute('data-ko-src');
       if (iconSrc) appIcon.src = iconSrc;
 
-      // 4) 버튼 라벨 & 저장
+      // 버튼 라벨 & 저장
       langBtn.textContent = lang.toUpperCase(); // 예: ZH-CN, ZH-TW
       localStorage.setItem('language', lang);
     }
 
-    // ========== 3) 초기 로딩: 저장값/브라우저 언어 ==========
+    // 초기 로딩: 저장값/브라우저 언어
     function detectInitialLang() {
       const bl = (navigator.language || navigator.userLanguage || 'ko').toLowerCase();
 
       if (bl.startsWith('en')) return 'en';
       if (bl.startsWith('ja')) return 'ja';
-
-      // 간체(중국, 싱가포르, Hans 계열)
       if (bl === 'zh-cn' || bl === 'zh-sg' || bl.includes('hans')) return 'zh-cn';
-
-      // 번체(대만, 홍콩, 마카오, Hant 계열)
       if (bl === 'zh-tw' || bl === 'zh-hk' || bl === 'zh-mo' || bl.includes('hant')) return 'zh-tw';
-
-      // 기타 zh-*는 번체로
       if (bl.startsWith('zh')) return 'zh-tw';
-
-      // 한국어 기본
       if (bl.startsWith('ko')) return 'ko';
-
-      // 그 외 기본값
       return 'ko';
     }
 
