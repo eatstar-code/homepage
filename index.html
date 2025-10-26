@@ -123,7 +123,7 @@
       .controls { top: 10px; right: 10px; }
     }
   </style>
-  </head>
+</head>
 <body>
   <div class="controls">
     <div class="language-switcher">
@@ -211,8 +211,8 @@
 
     langBtn.addEventListener('click',e=>{
       e.stopPropagation();
-      langMenu.classList.toggle('show');
-  T });
+  ->     langMenu.classList.toggle('show');
+    });
     document.querySelectorAll('.lang-item').forEach(i=>{
       i.addEventListener('click',e=>{
         e.preventDefault();
@@ -244,7 +244,7 @@
       const savedTheme=localStorage.getItem('theme')||'light';
       if(savedTheme==='dark'){body.classList.add('dark-mode');themeToggleBtn.innerHTML='<i class="fas fa-sun"></i>';}
       const bl=(navigator.language||'ko').toLowerCase();
-      let lang=localStorage.getItem('language')||
+  t     let lang=localStorage.getItem('language')||
         (bl.startsWith('en')?'en':bl.startsWith('ja')?'ja':
         bl==='zh-cn'||bl.includes('hans')?'zh-cn':bl.startsWith('zh')?'zh-tw':'ko');
       updateLanguage(lang);
