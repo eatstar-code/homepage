@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-    <style>
+  <style>
     :root {
       --bg-color: #f4f7fc;
       --card-bg-color: #ffffff;
@@ -39,7 +39,7 @@
     }
     .container {
       max-width: 720px;
-      width: 100%; /* 모바일 대응 */
+      width: 100%;
       background: var(--card-bg-color);
       border-radius: 20px;
       box-shadow: 0 10px 30px var(--shadow-color);
@@ -83,6 +83,9 @@
       transition: all 0.2s ease;
     }
     .github-btn:hover { background: #24292f; color: #fff; transform: translateY(-2px); }
+    /* 다크 모드 GitHub 버튼 */
+    body.dark-mode .github-btn { border-color: #c9d1d9; color: #c9d1d9; }
+    body.dark-mode .github-btn:hover { background: #c9d1d9; color: #1e1e1e; }
 
     .tech-badges { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 8px; }
     .badge { display: inline-flex; align-items: center; font-weight: 700; font-size: 0.85rem;
@@ -209,10 +212,13 @@
       localStorage.setItem('theme',dark?'dark':'light');
     });
 
+    // 👇 [수정됨] 지적하신 오타 'T'를 삭제했습니다.
     langBtn.addEventListener('click',e=>{
       e.stopPropagation();
-  ->     langMenu.classList.toggle('show');
+      langMenu.classList.toggle('show');
     });
+    // ---
+    
     document.querySelectorAll('.lang-item').forEach(i=>{
       i.addEventListener('click',e=>{
         e.preventDefault();
@@ -244,9 +250,9 @@
       const savedTheme=localStorage.getItem('theme')||'light';
       if(savedTheme==='dark'){body.classList.add('dark-mode');themeToggleBtn.innerHTML='<i class="fas fa-sun"></i>';}
       const bl=(navigator.language||'ko').toLowerCase();
-  t     let lang=localStorage.getItem('language')||
+      let lang=localStorage.getItem('language')||
         (bl.startsWith('en')?'en':bl.startsWith('ja')?'ja':
-        bl==='zh-cn'||bl.includes('hans')?'zh-cn':bl.startsWith('zh')?'zh-tw':'ko');
+dot       bl==='zh-cn'||bl.includes('hans')?'zh-cn':bl.startsWith('zh')?'zh-tw':'ko');
       updateLanguage(lang);
     });
   </script>
