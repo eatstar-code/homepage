@@ -1,260 +1,93 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <title>EATSTAR STUDIO</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="EATSTAR STUDIO 공식 홈페이지. '공주시간도감'과 'Omok by GPT' 앱을 만나보세요." />
+  <meta charset="UTF-8" />
+  <title>EATSTAR STUDIO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EATSTAR STUDIO 공식 홈페이지. '공주시간도감'과 'Omok by GPT' 앱을 만나보세요." />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- 외부 CSS (동일 도메인) -->
+  <link rel="stylesheet" href="/style.css" />
 
-  <style>
-    :root {
-      --bg-color: #f4f7fc;
-      --card-bg-color: #ffffff;
-      --text-color: #333333;
-      --heading-color: #1a237e;
-      --primary-color: #4a60d4;
-      --shadow-color: rgba(0, 0, 0, 0.1);
-    }
-    body.dark-mode {
-      --bg-color: #121212;
-      --card-bg-color: #1e1e1e;
-      --text-color: #e0e0e0;
-      --heading-color: #bb86fc;
-      --primary-color: #90a4ff;
-      --shadow-color: rgba(0, 0, 0, 0.4);
-    }
-    body {
-      font-family: 'Poppins','Noto Sans SC','Noto Sans TC','Noto Sans JP',sans-serif;
-      margin: 0; padding: 2rem 1rem;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      display: flex; justify-content: center; align-items: center;
-      min-height: 100vh;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    .container {
-      max-width: 720px;
-      width: 100%;
-      background: var(--card-bg-color);
-      border-radius: 20px;
-      box-shadow: 0 10px 30px var(--shadow-color);
-      padding: 2.5rem;
-      text-align: center;
-      position: relative;
-    }
-    .studio-logo { font-size: 2.5rem; font-weight: 700; color: var(--heading-color); }
-    .subtitle { font-size: 1.1rem; opacity: 0.8; margin-bottom: 2rem; }
-
-    .app-showcase-link {
-        text-decoration: none;
-        color: inherit;
-        display: block;
-        margin-top: 1.25rem;
-    }
-    .app-showcase {
-      background-color: var(--bg-color);
-      border-radius: 15px;
-      padding: 1.25rem;
-      display: flex; align-items: center; gap: 1rem;
-      text-align: left;
-      transition: all 0.3s ease;
-    }
-    .app-showcase-link:hover .app-showcase {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 30px var(--shadow-color);
-    }
-    .app-icon { width: 84px; height: 84px; border-radius: 16px; object-fit: cover; background-color: #ddd; flex-shrink: 0; }
-    .app-content { flex: 1; display: flex; align-items: center; gap: 1rem; min-width: 0; }
-    .app-info { min-width: 0; }
-    .app-info h3 { margin: 0 0 .5rem 0; font-size: 1.4rem; color: var(--heading-color); }
-    .app-info p { margin: 0; opacity: 0.9; }
-
-    .github-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-weight: 700; font-size: 0.95rem;
-      padding: 10px 14px; border-radius: 10px;
-      border: 2px solid #24292f; color: #24292f;
-      text-decoration: none; background: transparent;
-      transition: all 0.2s ease;
-    }
-    .github-btn:hover { background: #24292f; color: #fff; transform: translateY(-2px); }
-    /* 다크 모드 GitHub 버튼 */
-    body.dark-mode .github-btn { border-color: #c9d1d9; color: #c9d1d9; }
-    body.dark-mode .github-btn:hover { background: #c9d1d9; color: #1e1e1e; }
-
-    .tech-badges { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 8px; }
-    .badge { display: inline-flex; align-items: center; font-weight: 700; font-size: 0.85rem;
-      line-height: 1; padding: 3px 8px; border-radius: 9999px; white-space: nowrap; }
-    .badge-kotlin { color: #fff; background: linear-gradient(135deg,#7F52FF 0%,#C860FF 50%,#FF3D81 100%); }
-    .badge-python { color: #fff; background: #3776AB; border: 2px solid #FFD43B; padding: 2px 10px; }
-
-    .social-links { margin-top: 2rem; display: flex; justify-content: center; gap: 1.5rem; }
-    .social-links a { color: var(--text-color); font-size: 1.8rem; transition: 0.2s; }
-    .social-links a:hover { color: var(--primary-color); transform: translateY(-3px); }
-
-    .controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
-
-    #lang-btn,#theme-toggle-btn {
-      background: var(--card-bg-color); border: none; box-shadow: 0 2px 10px var(--shadow-color);
-      border-radius: 20px; cursor: pointer; color: var(--text-color);
-    }
-    #lang-btn { padding: 8px 16px; font-weight: 600; }
-    #theme-toggle-btn { width: 40px; height: 40px; border-radius: 50%; }
-
-    .lang-menu {
-      display: none; position: absolute; right: 0; top: 45px;
-      background: var(--card-bg-color); border-radius: 10px;
-      box-shadow: 0 4px 20px var(--shadow-color); overflow: hidden;
-      padding: 5px 0; z-index: 101;
-    }
-    .lang-menu.show { display: block; }
-    .lang-item { display: block; padding: 10px 20px; text-decoration: none; color: var(--text-color); font-size: 0.9rem; white-space: nowrap; }
-    .lang-item:hover { background-color: var(--bg-color); }
-
-    footer { margin-top: 2rem; font-size: 0.9rem; opacity: 0.6; }
-
-    @media (max-width: 560px){
-      .app-showcase{ flex-direction: column; align-items: stretch; }
-      .app-content { flex-direction: column; align-items: flex-start; }
-      .app-info { width: 100%; }
-      .container { padding: 2rem 1.5rem; }
-      .controls { top: 10px; right: 10px; }
-    }
-  </style>
+  <!-- 폰트/아이콘 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
 <body>
-  <div class="controls">
-    <div class="language-switcher">
-      <button id="lang-btn">KO</button>
-      <div id="lang-menu" class="lang-menu">
-        <a href="#" class="lang-item" data-lang="ko">한국어</a>
-        <a href="#" class="lang-item" data-lang="en">English</a>
-        <a href="#" class="lang-item" data-lang="ja">日本語</a>
-        <a href="#" class="lang-item" data-lang="zh-cn">简体中文</a>
-        <a href="#" class="lang-item" data-lang="zh-tw">繁體中文</a>
-      </div>
-    </div>
-    <button id="theme-toggle-btn"><i class="fas fa-moon"></i></button>
-  </div>
+  <div class="controls">
+    <div class="language-switcher">
+      <button id="lang-btn">KO</button>
+      <div id="lang-menu" class="lang-menu">
+        <a href="#" class="lang-item" data-lang="ko">한국어</a>
+        <a href="#" class="lang-item" data-lang="en">English</a>
+        <a href="#" class="lang-item" data-lang="ja">日本語</a>
+        <a href="#" class="lang-item" data-lang="zh-cn">简体中文</a>
+        <a href="#" class="lang-item" data-lang="zh-tw">繁體中文</a>
+      </div>
+    </div>
+    <button id="theme-toggle-btn"><i class="fas fa-moon"></i></button>
+  </div>
 
-  <div class="container">
-    <h1 class="studio-logo">EATSTAR STUDIO</h1>
-    <p class="subtitle"
-      data-ko="창의적인 아이디어를 현실로 만듭니다."
-      data-en="Bringing creative ideas to life."
-      data-ja="創造的なアイデアを現実に。"
-      data-zh-cn="将创意变为现实。"
-      data-zh-tw="將創意變為現實。"></p>
+  <div class="container">
+    <h1 class="studio-logo">EATSTAR STUDIO</h1>
+    <p class="subtitle"
+      data-ko="창의적인 아이디어를 현실로 만듭니다."
+      data-en="Bringing creative ideas to life."
+      data-ja="創造的なアイデアを現実に。"
+      data-zh-cn="将创意变为现实。"
+      data-zh-tw="將創意變為現實。"></p>
 
-        <a href="/gongjusigandogam/" class="app-showcase-link">
-        <div class="app-showcase">
-          <img src="icon_ko.png" alt="App Icon" class="app-icon" id="app-icon"
-            data-ko-src="icon_ko.png" data-en-src="icon_en.png" data-ja-src="icon_ja.png"
-            data-zh-cn-src="icon_zh-cn.png" data-zh-tw-src="icon_zh-tw.png" />
-          <div class="app-content">
-            <div class="app-info">
-              <h3 data-ko="공주시간도감" data-en="Gongju Time Archive"
-                  data-ja="コンジュ時間図鑑 – 公州歴史探訪"
-                  data-zh-cn="公州时间图鉴" data-zh-tw="公州時間圖鑑"></h3>
-              <p data-ko="여행의 모든 순간을 기록하고 공유하세요."
-                 data-en="Record and share every moment of your journey."
-                 data-ja="旅のすべての瞬間を 기록し、共有しましょう。"
-                 data-zh-cn="记录并分享您旅途中的每一个瞬间。"
-                 data-zh-tw="記錄並分享您旅途中的每一個瞬間。"></p>
-              <div class="tech-badges"><span class="badge badge-kotlin">Kotlin/App</span></div>
-            </div>
-          </div>
-        </div>
+    <a href="/gongjusigandogam/" class="app-showcase-link">
+      <div class="app-showcase">
+        <img src="icon_ko.png" alt="App Icon" class="app-icon" id="app-icon"
+             data-ko-src="icon_ko.png" data-en-src="icon_en.png" data-ja-src="icon_ja.png"
+             data-zh-cn-src="icon_zh-cn.png" data-zh-tw-src="icon_zh-tw.png" />
+        <div class="app-content">
+          <div class="app-info">
+            <h3 data-ko="공주시간도감" data-en="Gongju Time Archive"
+                data-ja="コンジュ時間図鑑 – 公州歴史探訪"
+                data-zh-cn="公州时间图鉴" data-zh-tw="公州時間圖鑑"></h3>
+            <p data-ko="여행의 모든 순간을 기록하고 공유하세요."
+               data-en="Record and share every moment of your journey."
+               data-ja="旅のすべての瞬間を記録し、共有しましょう。"
+               data-zh-cn="记录并分享您旅途中的每一个瞬间。"
+               data-zh-tw="記錄並分享您旅途中的每一個瞬間。"></p>
+            <div class="tech-badges"><span class="badge badge-kotlin">Kotlin/App</span></div>
+          </div>
+        </div>
+      </div>
     </a>
 
-        <a href="/obg/" class="app-showcase-link">
-        <div class="app-showcase">
-          <img src="obg.png" alt="Omok by GPT Icon" class="app-icon" />
-          <div class="app-content">
-            <div class="app-info">
-              <h3 data-ko="Omok by GPT (ObG)" data-en="Omok by GPT (ObG)"
-                  data-ja="Omok by GPT (ObG)" data-zh-cn="Omok by GPT (ObG)" data-zh-tw="Omok by GPT (ObG)"></h3>
-              <p data-ko="Omok by GPT는 ChatGPT를 활용해 개발한 GUI 기반 오목 프로그램입니다."
-                 data-en="Omok by GPT is a GUI-based Omok program developed using ChatGPT."
-                 data-ja="Omok by GPT は ChatGPT を活用して開発された GUI ベースの五目並べプログラムです。"
-                 data-zh-cn="Omok by GPT 是一个使用 ChatGPT 开发的基于 GUI 的五子棋程序。"
-                 data-zh-tw="Omok by GPT 是使用 ChatGPT 開發的 GUI 型五子棋程式。"></p>
-              <div class="tech-badges"><span class="badge badge-python">Python/Program</span></div>
-            </div>
-          </div>
-        </div>
+    <a href="/obg/" class="app-showcase-link">
+      <div class="app-showcase">
+        <img src="obg.png" alt="Omok by GPT Icon" class="app-icon" />
+        <div class="app-content">
+          <div class="app-info">
+            <h3 data-ko="Omok by GPT (ObG)" data-en="Omok by GPT (ObG)"
+                data-ja="Omok by GPT (ObG)" data-zh-cn="Omok by GPT (ObG)" data-zh-tw="Omok by GPT (ObG)"></h3>
+            <p data-ko="Omok by GPT는 ChatGPT를 활용해 개발한 GUI 기반 오목 프로그램입니다."
+               data-en="Omok by GPT is a GUI-based Omok program developed using ChatGPT."
+               data-ja="Omok by GPT は ChatGPT を活用して開発された GUI ベースの五目並べプログラムです。"
+               data-zh-cn="Omok by GPT 是一个使用 ChatGPT 开发的基于 GUI 的五子棋程序。"
+               data-zh-tw="Omok by GPT 是使用 ChatGPT 開發的 GUI 型五子棋程式。"></p>
+            <div class="tech-badges"><span class="badge badge-python">Python/Program</span></div>
+          </div>
+        </div>
+      </div>
     </a>
 
-    <div class="social-links">
-      <a href="https://github.com/eatstar-code" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-      <a href="mailto:eatstar.studio@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-      <a href="https://eatstar.tistory.com/" target="_blank" title="Tistory Blog"><i class="fas fa-blog"></i></a>
-      <a href="https://buymeacoffee.com/eatstar200o" target="_blank" title="Buy Me a Coffee"><i class="fas fa-mug-hot"></i></a>
-    </div>
-    <footer>&copy; EATSTAR STUDIO 2025. All rights reserved.</footer>
-  </div>
+    <div class="social-links">
+      <a href="https://github.com/eatstar-code" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="mailto:eatstar.studio@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://eatstar.tistory.com/" target="_blank" title="Tistory Blog"><i class="fas fa-blog"></i></a>
+      <a href="https://buymeacoffee.com/eatstar200o" target="_blank" title="Buy Me a Coffee"><i class="fas fa-mug-hot"></i></a>
+    </div>
+    <footer>&copy; EATSTAR STUDIO 2025. All rights reserved.</footer>
+  </div>
 
-  <script>
-    const themeToggleBtn=document.getElementById('theme-toggle-btn');
-    const langBtn=document.getElementById('lang-btn');
-    const langMenu=document.getElementById('lang-menu');
-    const body=document.body, appIcon=document.getElementById('app-icon');
-
-    themeToggleBtn.addEventListener('click',()=>{
-      body.classList.toggle('dark-mode');
-      const dark=body.classList.contains('dark-mode');
-      themeToggleBtn.innerHTML=dark?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
-      localStorage.setItem('theme',dark?'dark':'light');
-    });
-
-    // 👇 [수정됨] 지적하신 오타 'T'를 삭제했습니다.
-    langBtn.addEventListener('click',e=>{
-      e.stopPropagation();
-      langMenu.classList.toggle('show');
-    });
-    // ---
-    
-    document.querySelectorAll('.lang-item').forEach(i=>{
-      i.addEventListener('click',e=>{
-        e.preventDefault();
-        updateLanguage(i.dataset.lang);
-        langMenu.classList.remove('show');
-      });
-    });
-    window.addEventListener('click',e=>{
-      if(langBtn && !langBtn.contains(e.target) && langMenu)langMenu.classList.remove('show');
-    });
-
-    function updateLanguage(lang){
-      document.documentElement.lang=lang;
-      document.querySelectorAll('[data-ko]').forEach(el=>{
-        const val=el.getAttribute(`data-${lang}`)||el.getAttribute('data-en')||el.getAttribute('data-ko');
-        if(val)el.textContent=val;
-      });
-
-      if (appIcon) {
-        const iconSrc=appIcon.getAttribute(`data-${lang}-src`)||appIcon.getAttribute('data-en-src')||appIcon.getAttribute('data-ko-src');
-        if(iconSrc)appIcon.src=iconSrc;
-      }
-      
-      if(langBtn) langBtn.textContent=lang.toUpperCase();
-      localStorage.setItem('language',lang);
-    }
-
-    document.addEventListener('DOMContentLoaded',()=>{
-      const savedTheme=localStorage.getItem('theme')||'light';
-      if(savedTheme==='dark'){body.classList.add('dark-mode');themeToggleBtn.innerHTML='<i class="fas fa-sun"></i>';}
-      const bl=(navigator.language||'ko').toLowerCase();
-      let lang=localStorage.getItem('language')||
-        (bl.startsWith('en')?'en':bl.startsWith('ja')?'ja':
-dot       bl==='zh-cn'||bl.includes('hans')?'zh-cn':bl.startsWith('zh')?'zh-tw':'ko');
-      updateLanguage(lang);
-    });
-  </script>
+  <!-- 외부 JS (동일 도메인), defer로 로딩 -->
+  <script src="/app.js" defer></script>
 </body>
 </html>
