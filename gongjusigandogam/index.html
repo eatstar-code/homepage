@@ -5,14 +5,11 @@
   <title>공주시간도감 - EATSTAR STUDIO</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="EATSTAR STUDIO의 '공주시간도감' 앱. 여행의 모든 순간을 기록하고 공유하세요." />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
   <style>
-    /* --- [복사됨] 메인 페이지와 동일한 스타일 --- */
     :root {
       --bg-color: #f4f7fc;
       --card-bg-color: #ffffff;
@@ -40,6 +37,7 @@
     }
     .container {
       max-width: 720px;
+      width: 100%;
       background: var(--card-bg-color);
       border-radius: 20px;
       box-shadow: 0 10px 30px var(--shadow-color);
@@ -47,11 +45,10 @@
       text-align: center;
       position: relative;
     }
-    /* .app-showcase 등 불필요한 스타일 제거 */
     .google-play-btn img { height: 48px; transition: transform 0.2s ease; }
     .google-play-btn:hover img { transform: scale(1.05); }
 
-    .controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; }
+    .controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100;}
     #lang-btn,#theme-toggle-btn {
       background: var(--card-bg-color); border: none; box-shadow: 0 2px 10px var(--shadow-color);
       border-radius: 20px; cursor: pointer; color: var(--text-color);
@@ -62,15 +59,15 @@
       display: none; position: absolute; right: 0; top: 45px;
       background: var(--card-bg-color); border-radius: 10px;
       box-shadow: 0 4px 20px var(--shadow-color); overflow: hidden;
+      padding: 5px 0; z-index: 101;
     }
     .lang-menu.show { display: block; }
-    .lang-item { display: block; padding: 10px 20px; text-decoration: none; color: var(--text-color); font-size: 0.9rem; }
+    .lang-item { display: block; padding: 10px 20px; text-decoration: none; color: var(--text-color); font-size: 0.9rem; white-space: nowrap; }
     .lang-item:hover { background-color: var(--bg-color); }
     footer { margin-top: 2rem; font-size: 0.9rem; opacity: 0.6; }
 
-    /* --- [추가됨] 세부 페이지 전용 스타일 --- */
     .home-link {
-        position: absolute; /* .container 기준 */
+        position: absolute;
         top: 20px;
         left: 20px;
         font-size: 1.5rem;
@@ -80,15 +77,14 @@
         transition: all 0.2s;
     }
     .home-link:hover { opacity: 1; transform: scale(1.1); }
-
     .detail-promo-img {
         width: 100%;
-        max-width: 400px; /* 큰 이미지 크기, 조절 가능 */
+        max-width: 400px;
         height: auto;
         border-radius: 16px;
-        margin-top: 3rem; /* 홈 버튼과 겹치지 않게 */
+        margin-top: 3rem;
         margin-bottom: 1.5rem;
-        background-color: #ddd; /* 이미지 없을 때 */
+        background-color: #ddd;
     }
     .detail-title {
         font-size: 2.2rem;
@@ -103,8 +99,14 @@
         margin: 1rem auto;
         line-height: 1.8;
     }
-    .detail-actions {
-        margin-top: 2.5rem;
+    .detail-actions { margin-top: 2.5rem; }
+    @media (max-width: 560px){
+      .container { padding: 2rem 1.5rem; }
+      .controls { top: 10px; right: 10px; }
+      .home-link { top: 10px; left: 10px; }
+      .detail-promo-img { margin-top: 2.5rem; }
+      .detail-title { font-size: 1.8rem; }
+      .detail-desc { font-size: 1rem; }
     }
   </style>
 </head>
@@ -125,16 +127,13 @@
 
   <div class="container">
     <a href="/" class="home-link" title="Home"><i class="fas fa-arrow-left"></i></a>
-
     <img src="/icon_ko.png" alt="Gongju Time Archive Promo" class="detail-promo-img" id="app-icon"
          data-ko-src="/icon_ko.png" data-en-src="/icon_en.png" data-ja-src="/icon_ja.png"
          data-zh-cn-src="/icon_zh-cn.png" data-zh-tw-src="/icon_zh-tw.png" />
-
     <h1 class="detail-title"
       data-ko="공주시간도감" data-en="Gongju Time Archive"
       data-ja="コンジュ時間図鑑 – 公州歴史探訪"
       data-zh-cn="公州时间图鉴" data-zh-tw="公州時間圖鑑"></h1>
-
     <p class="detail-desc"
       data-ko="여행의 모든 순간을 기록하고 공유하세요. [여기에 더 자세한 앱 설명을 적어주세요. 예를 들어, 앱의 주요 기능, 사용법, 개발 배경 등을 추가할 수 있습니다.]"
       data-en="Record and share every moment of your journey. [Add more detailed app description here. For example, key features, how to use, development background, etc.]"
@@ -144,7 +143,19 @@
     
     <div class="detail-actions">
       <a href="https://play.google.com/store/apps/details?id=com.eatstar.sigandogam" target="_blank" class="google-play-btn">
-        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" alt="Google Play에서 다운로드">
+                <img id="gongju-play-badge"
+             src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png" 
+             alt="Google Play에서 다운로드"
+             data-ko-src="https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png"
+             data-en-src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+             data-ja-src="https://play.google.com/intl/en_us/badges/static/images/badges/ja_badge_web_generic.png"
+             data-zh-cn-src="https://play.google.com/intl/en_us/badges/static/images/badges/zh-cn_badge_web_generic.png"
+             data-zh-tw-src="https://play.google.com/intl/en_us/badges/static/images/badges/zh-tw_badge_web_generic.png"
+             data-ko-alt="Google Play에서 다운로드"
+             data-en-alt="Get it on Google Play"
+             data-ja-alt="Google Play で手に入れよう"
+             data-zh-cn-alt="在 Google Play 上获取"
+             data-zh-tw-alt="透過 Google Play 取得">
       </a>
     </div>
 
@@ -152,11 +163,11 @@
   </div>
 
   <script>
-    // [중요] 메인 페이지와 동일하게 수정된 스크립트입니다.
     const themeToggleBtn=document.getElementById('theme-toggle-btn');
     const langBtn=document.getElementById('lang-btn');
     const langMenu=document.getElementById('lang-menu');
     const body=document.body, appIcon=document.getElementById('app-icon');
+    const gongjuBadge = document.getElementById('gongju-play-badge');
 
     themeToggleBtn.addEventListener('click',()=>{
       body.classList.toggle('dark-mode');
@@ -177,7 +188,7 @@
       });
     });
     window.addEventListener('click',e=>{
-      if(langBtn && !langBtn.contains(e.target))langMenu.classList.remove('show');
+      if(langBtn && !langBtn.contains(e.target) && langMenu)langMenu.classList.remove('show');
     });
 
     function updateLanguage(lang){
@@ -187,12 +198,18 @@
         if(val)el.textContent=val;
       });
 
-      if (appIcon) { // 이 페이지에는 appIcon이 있으므로 작동합니다.
+      if (appIcon) {
         const iconSrc=appIcon.getAttribute(`data-${lang}-src`)||appIcon.getAttribute('data-en-src')||appIcon.getAttribute('data-ko-src');
         if(iconSrc)appIcon.src=iconSrc;
       }
+      if (gongjuBadge) {
+        const badgeSrc = gongjuBadge.getAttribute(`data-${lang}-src`) || gongjuBadge.getAttribute('data-ko-src');
+        const badgeAlt = gongjuBadge.getAttribute(`data-${lang}-alt`) || gongjuBadge.getAttribute('data-ko-alt');
+        if (badgeSrc) gongjuBadge.src = badgeSrc;
+        if (badgeAlt) gongjuBadge.alt = badgeAlt;
+      }
       
-      langBtn.textContent=lang.toUpperCase();
+      if(langBtn) langBtn.textContent=lang.toUpperCase();
       localStorage.setItem('language',lang);
     }
 
