@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-  <style>
+    <style>
     :root {
       --bg-color: #f4f7fc;
       --card-bg-color: #ffffff;
@@ -39,6 +39,7 @@
     }
     .container {
       max-width: 720px;
+      width: 100%; /* 모바일 대응 */
       background: var(--card-bg-color);
       border-radius: 20px;
       box-shadow: 0 10px 30px var(--shadow-color);
@@ -49,7 +50,6 @@
     .studio-logo { font-size: 2.5rem; font-weight: 700; color: var(--heading-color); }
     .subtitle { font-size: 1.1rem; opacity: 0.8; margin-bottom: 2rem; }
 
-    /* --- [수정됨] 카드 전체를 감싸는 링크 스타일 --- */
     .app-showcase-link {
         text-decoration: none;
         color: inherit;
@@ -60,22 +60,19 @@
       background-color: var(--bg-color);
       border-radius: 15px;
       padding: 1.25rem;
-      /* margin-top 삭제 (a 태그로 이동) */
       display: flex; align-items: center; gap: 1rem;
       text-align: left;
-      transition: all 0.3s ease; /* 호버 효과를 위해 'all'로 변경 */
+      transition: all 0.3s ease;
     }
-    /* --- [추가됨] 카드 호버 효과 --- */
     .app-showcase-link:hover .app-showcase {
         transform: translateY(-5px);
         box-shadow: 0 12px 30px var(--shadow-color);
     }
-    .app-icon { width: 84px; height: 84px; border-radius: 16px; object-fit: cover; background-color: #ddd; }
+    .app-icon { width: 84px; height: 84px; border-radius: 16px; object-fit: cover; background-color: #ddd; flex-shrink: 0; }
     .app-content { flex: 1; display: flex; align-items: center; gap: 1rem; min-width: 0; }
     .app-info { min-width: 0; }
     .app-info h3 { margin: 0 0 .5rem 0; font-size: 1.4rem; color: var(--heading-color); }
     .app-info p { margin: 0; opacity: 0.9; }
-    /* .app-actions 는 세부 페이지로 이동했으므로 삭제 */
 
     .github-btn {
       display: inline-flex; align-items: center; gap: 8px;
@@ -97,7 +94,7 @@
     .social-links a { color: var(--text-color); font-size: 1.8rem; transition: 0.2s; }
     .social-links a:hover { color: var(--primary-color); transform: translateY(-3px); }
 
-    .controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; }
+    .controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
 
     #lang-btn,#theme-toggle-btn {
       background: var(--card-bg-color); border: none; box-shadow: 0 2px 10px var(--shadow-color);
@@ -110,18 +107,23 @@
       display: none; position: absolute; right: 0; top: 45px;
       background: var(--card-bg-color); border-radius: 10px;
       box-shadow: 0 4px 20px var(--shadow-color); overflow: hidden;
+      padding: 5px 0; z-index: 101;
     }
     .lang-menu.show { display: block; }
-    .lang-item { display: block; padding: 10px 20px; text-decoration: none; color: var(--text-color); font-size: 0.9rem; }
+    .lang-item { display: block; padding: 10px 20px; text-decoration: none; color: var(--text-color); font-size: 0.9rem; white-space: nowrap; }
     .lang-item:hover { background-color: var(--bg-color); }
 
     footer { margin-top: 2rem; font-size: 0.9rem; opacity: 0.6; }
 
     @media (max-width: 560px){
       .app-showcase{ flex-direction: column; align-items: stretch; }
+      .app-content { flex-direction: column; align-items: flex-start; }
+      .app-info { width: 100%; }
+      .container { padding: 2rem 1.5rem; }
+      .controls { top: 10px; right: 10px; }
     }
   </style>
-</head>
+  </head>
 <body>
   <div class="controls">
     <div class="language-switcher">
@@ -151,7 +153,6 @@
           <img src="icon_ko.png" alt="App Icon" class="app-icon" id="app-icon"
             data-ko-src="icon_ko.png" data-en-src="icon_en.png" data-ja-src="icon_ja.png"
             data-zh-cn-src="icon_zh-cn.png" data-zh-tw-src="icon_zh-tw.png" />
-
           <div class="app-content">
             <div class="app-info">
               <h3 data-ko="공주시간도감" data-en="Gongju Time Archive"
@@ -159,12 +160,12 @@
                   data-zh-cn="公州时间图鉴" data-zh-tw="公州時間圖鑑"></h3>
               <p data-ko="여행의 모든 순간을 기록하고 공유하세요."
                  data-en="Record and share every moment of your journey."
-                 data-ja="旅のすべての瞬間を記録し、共有しましょう。"
+                 data-ja="旅のすべての瞬間を 기록し、共有しましょう。"
                  data-zh-cn="记录并分享您旅途中的每一个瞬间。"
                  data-zh-tw="記錄並分享您旅途中的每一個瞬間。"></p>
               <div class="tech-badges"><span class="badge badge-kotlin">Kotlin/App</span></div>
             </div>
-                  </div>
+          </div>
         </div>
     </a>
 
@@ -182,7 +183,7 @@
                  data-zh-tw="Omok by GPT 是使用 ChatGPT 開發的 GUI 型五子棋程式。"></p>
               <div class="tech-badges"><span class="badge badge-python">Python/Program</span></div>
             </div>
-                  </div>
+          </div>
         </div>
     </a>
 
@@ -196,8 +197,6 @@
   </div>
 
   <script>
-    // [중요] 스크립트를 수정했습니다. 
-    // 세부 페이지에서는 appIcon이 없을 수 있으므로, 에러 방지를 위해 if(appIcon) 검사를 추가합니다.
     const themeToggleBtn=document.getElementById('theme-toggle-btn');
     const langBtn=document.getElementById('lang-btn');
     const langMenu=document.getElementById('lang-menu');
@@ -213,7 +212,7 @@
     langBtn.addEventListener('click',e=>{
       e.stopPropagation();
       langMenu.classList.toggle('show');
-    });
+  T });
     document.querySelectorAll('.lang-item').forEach(i=>{
       i.addEventListener('click',e=>{
         e.preventDefault();
@@ -222,7 +221,7 @@
       });
     });
     window.addEventListener('click',e=>{
-      if(langBtn && !langBtn.contains(e.target))langMenu.classList.remove('show');
+      if(langBtn && !langBtn.contains(e.target) && langMenu)langMenu.classList.remove('show');
     });
 
     function updateLanguage(lang){
@@ -232,13 +231,12 @@
         if(val)el.textContent=val;
       });
 
-      // [수정됨] appIcon이 null일 경우를 대비해 검사
       if (appIcon) {
         const iconSrc=appIcon.getAttribute(`data-${lang}-src`)||appIcon.getAttribute('data-en-src')||appIcon.getAttribute('data-ko-src');
         if(iconSrc)appIcon.src=iconSrc;
       }
       
-      langBtn.textContent=lang.toUpperCase();
+      if(langBtn) langBtn.textContent=lang.toUpperCase();
       localStorage.setItem('language',lang);
     }
 
