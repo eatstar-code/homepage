@@ -134,18 +134,9 @@ body {
 }
 
 /* New badges for AI QuickLaunch */
-.badge-html {
-  background: #e34f26; /* HTML5 */
-  color: #fff;
-}
-.badge-css {
-  background: #1572b6; /* CSS3 */
-  color: #fff;
-}
-.badge-js {
-  background: #f7df1e; /* JavaScript */
-  color: #333;
-}
+.badge-html { background: #e34f26; color: #fff; }   /* HTML5 */
+.badge-css  { background: #1572b6; color: #fff; }   /* CSS3  */
+.badge-js   { background: #f7df1e; color: #333; }   /* JS    */
 
 /* ===========================
    Common Controls
@@ -262,22 +253,17 @@ footer {
   max-width: 540px;
   margin-inline: auto;
 }
-.detail-features h4 {
-  margin-bottom: .4rem;
-  color: var(--heading-color);
-}
-.detail-features ul {
-  padding-left: 1.2rem;
-  margin: .3rem 0 1rem;
-}
-.detail-features li {
-  margin-bottom: .5rem;
-  line-height: 1.5;
-}
+.detail-features h4 { margin-bottom: .4rem; color: var(--heading-color); }
+.detail-features ul { padding-left: 1.2rem; margin: .3rem 0 1rem; }
+.detail-features li { margin-bottom: .5rem; line-height: 1.5; }
 
 /* Store buttons */
 .detail-actions {
   margin-top: 1rem;
+  text-align: center;            /* 중앙 정렬 */
+}
+.google-play-btn {
+  display: inline-block;         /* 중앙 정렬 적용 */
 }
 .store-btn-grid {
   display: grid;
@@ -299,29 +285,25 @@ footer {
   transition: transform .2s ease, opacity .2s ease;
 }
 .store-btn i { font-size: 1.1rem; }
-.store-btn.chrome { background: #4c8bf5; }
-.store-btn.edge { background: #0078d7; }
+.store-btn.chrome  { background: #4c8bf5; }
+.store-btn.edge    { background: #0078d7; }
 .store-btn.firefox { background: #ff7139; }
-.store-btn.whale { background: #00aacc; }
-.store-btn.disabled {
-  opacity: .5;
-  pointer-events: none;
-}
+.store-btn.whale   { background: #00aacc; }
+.store-btn.disabled { opacity: .5; pointer-events: none; }
 .store-btn:hover { transform: translateY(-2px); }
+
+/* Google Play 공식 배지 크기/정렬 (경계 제거) */
+.google-play-btn img {
+  height: 56px;                  /* 데스크톱 기본 */
+  width: auto;
+  display: block;                /* 베이스라인 틈 제거 */
+  border-radius: 0;              /* 라운드 제거 */
+  box-shadow: none;              /* 그림자 제거(경계처럼 보일 수 있음) */
+}
 
 /* ===========================
    Responsive
 =========================== */
-/* === Google Play 배지 크기 - 전역 === */
-.google-play-btn img {
-  height: 56px;   /* 데스크톱 기본 */
-  width: auto;
-  display: block;
-  box-shadow: 0 6px 16px var(--shadow-color);
-  border-radius: 12px;
-}
-
-/* === Responsive === */
 @media (max-width: 960px) {
   .google-play-btn img { height: 52px; }
 }
@@ -337,6 +319,6 @@ footer {
   .app-info p { font-size: .9rem; }
   .detail-title { font-size: 1.6rem; }
   .detail-desc { font-size: .95rem; max-width: 95%; }
-  .google-play-btn img { height: 44px; } /* 작은 화면 */
+  .google-play-btn img { height: 44px; }  /* 작은 화면 */
   .home-link { top: 14px; left: 14px; font-size: 1.5rem; }
 }
