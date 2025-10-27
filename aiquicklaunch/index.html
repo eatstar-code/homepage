@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI QuickLaunch - EATSTAR STUDIO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EATSTAR STUDIO의 'AI QuickLaunch'. 클릭 한 번으로 여러 GPT 및 LLM 서비스를 동시에 실행합니다." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- External CSS/JS from root -->
+  <link rel="stylesheet" href="/style.css" />
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="controls">
+    <div class="language-switcher">
+      <button id="lang-btn">KO</button>
+      <div id="lang-menu" class="lang-menu">
+        <a href="#" class="lang-item" data-lang="ko">한국어</a>
+        <a href="#" class="lang-item" data-lang="en">English</a>
+        <a href="#" class="lang-item" data-lang="ja">日本語</a>
+        <a href="#" class="lang-item" data-lang="zh-cn">简体中文</a>
+        <a href="#" class="lang-item" data-lang="zh-tw">繁體中文</a>
+      </div>
+    </div>
+    <button id="theme-toggle-btn"><i class="fas fa-moon"></i></button>
+  </div>
+
+  <div class="container">
+    <a href="/" class="home-link" title="Home"><i class="fas fa-arrow-left"></i></a>
+
+    <!-- 아이콘은 보라색 계열로 임시 지정했습니다. ai_quicklaunch_promo.png 등으로 교체하세요. -->
+    <img
+      src="https://placehold.co/320x320/6A0DAD/FFF?text=AI+QuickLaunch"
+      alt="AI QuickLaunch Promo"
+      class="detail-promo-img"
+    />
+
+    <h1 class="detail-title"
+      data-ko="AI QuickLaunch"
+      data-en="AI QuickLaunch"
+      data-ja="AI QuickLaunch"
+  S   data-zh-cn="AI QuickLaunch"
+      data-zh-tw="AI QuickLaunch"></h1>
+
+    <!-- 소개 문구 1 -->
+    <p class="detail-desc"
+      data-ko="매일 똑같은 AI 탭들을 여느라 시간을 낭비하고 계신가요? AI QuickLaunch는 챗GPT, 제미니, 클로드 등 즐겨 찾는 모든 AI 서비스를 단 한 번의 클릭으로 실행해 주는 최고의 생산성 도구입니다."
+      data-en="Wasting time opening the same AI tabs every day? AI QuickLaunch is the ultimate productivity tool that launches all your favorite AI services like ChatGPT, Gemini, and Claude with a single click."
+      data-ja="毎日同じAIタブを開くのに時間を無駄にしていませんか？AI QuickLaunchは、ChatGPT、Gemini、Claudeなどのお気に入りのAIサービスをワンクリックですべて起動できる、究極の生産性向上ツールです。"
+      data-zh-cn="每天是否在浪费时间打开相同的 AI 选项卡？ AI QuickLaunch 是一款终极生产力工具，只需单击一下即可启动所有您喜爱的 AI 服务，如 ChatGPT、Gemini 和 Claude。"
+      data-zh-tw="每天是否在浪費時間開啟相同的 AI 分頁？ AI QuickLaunch 是一款終極生產力工具，只需點擊一下即可啟動所有您喜愛的 AI 服務，如 ChatGPT、Gemini 和 Claude。"></p>
+    
+    <!-- 소개 문구 2 -->
+    <p class="detail-desc"
+      data-ko="복잡한 브라우저가 지겨우신가요? AI QuickLaunch로 당신의 작업 흐름을 간소화하세요. 나만의 AI 목록을 완벽하게 구성하면, 확장 프로그램이 순서, ON/OFF 스위치 상태, 그리고 탭 고정 옵션까지 모두 기억합니다."
+      data-en="Tired of browser clutter? Streamline your workflow with AI QuickLaunch. Perfectly organize your custom AI list, and the extension remembers your order, ON/OFF toggle states, and even tab pinning options."
+      data-ja="複雑なブラウザにうんざりしていませんか？AI QuickLaunchでワークフローを簡素化しましょう。独自のAIリストを完璧に整理すれば、拡張機能が順番、ON/OFFトグル状態、タブ固定オプションまで記憶します。"
+      data-zh-cn="厌倦了混乱的浏览器？使用 AI QuickLaunch 简化您的工作流程。完美整理您的自定义 AI 列表，扩展程序会记住您的顺序、ON/OFF 切换状态，甚至标签固定选项。"
+      data-zh-tw="厭倦了混亂的瀏覽器？使用 AI QuickLaunch 簡化您的工作流程。完美整理您的自訂 AI 列表，擴充套件會記住您的順序、ON/OFF 切換狀態，甚至分頁固定選項。"></p>
+
+
+    <!-- 주요 기능 목록 (style.css에 스타일 추가됨) -->
+    <div class="detail-features">
+      <h4 data-ko="주요 기능"
+          data-en="Key Features"
+          data-ja="主な機能"
+          data-zh-cn="主要特点"
+          data-zh-tw="主要特點"></h4>
+      <ul>
+        <li data-ko="압도적인 시간 절약: 매번 탭을 하나씩 열 필요 없이, 클릭 한 번으로 모든 AI 작업을 즉시 시작하세요."
+            data-en="Massive Time Saver: Stop opening tabs one by one. Start all your AI tasks instantly with a single click."
+            data-ja="圧倒的な時間節約：タブを一つずつ開く必要はもうありません。ワンクリックですべてのAIタスクを即座に開始します。"
+            data-zh-cn="节省大量时间：无需再一一打开标签页。单击一下即可立即开始所有 AI 任务。"
+            data-zh-tw="節省大量時間：無需再一一開啟分頁。點擊一下即可立即開始所有 AI 任務。"></li>
+        <li data-ko="완벽한 커스터마이징: 당신이 직접 제어할 수 있습니다. 드래그 앤 드롭으로 작업 순서에 맞게 AI 목록을 자유롭게 편집하세요."
+            data-en="Total Customization: You are in control. Freely edit your AI list with drag-and-drop to match your workflow."
+            data-ja="完全なカスタマイズ：あなたが管理します。ドラッグ＆ドロップでAIリストを自由に編集し、ワークフローに合わせましょう。"
+            data-zh-cn="完全自定义：一切尽在掌控。通过拖放自由编辑您的 AI 列表，以匹配您的工作流程。"
+            data-zh-tw="完全自訂：一切盡在掌控。透過拖放自由編輯您的 AI 列表，以符合您的工作流程。"></li>
+        <li data-ko="스마트 토글 관리: 간단한 ON/OFF 스위치로 이번에 실행할 AI만 정확하게 선택할 수 있습니다."
+            data-en="Smart Toggle Management: Use the simple ON/OFF switch to select exactly which AIs to launch this session."
+            data-ja="スマートなトグル管理：シンプルなON/OFFスイッチで、今回起動するAIだけを正確に選択できます。"
+            data-zh-cn="智能切换管理：使用简单的 ON/OFF 开关，精确选择本次要启动的 AI。"
+            data-zh-tw="智慧切換管理：使用簡單的 ON/OFF 開關，精確選擇本次要啟動的 AI。"></li>
+        <li data-ko="깔끔한 작업 환경: '탭 고정으로 실행' 옵션을 사용해 브라우저를 깔끔하게 유지하고 AI 탭을 항상 준비된 상태로 만드세요."
+            data-en="Clean Workspace: Use the 'Launch as Pinned Tabs' option to keep your browser tidy and your AI tabs always ready."
+            data-ja="クリーンな作業環境：「タブを固定して起動」オプションで、ブラウザをすっきりと保ち、AIタブを常に準備完了状態にします。"
+            data-zh-cn="整洁的工作区：使用“固定标签页启动”选项可保持浏览器整洁，让您的 AI 标签页随时可用。"
+            data-zh-tw="整潔的工作區：使用「固定分頁啟動」選項可保持瀏覽器整潔，讓您的 AI 分頁隨時可用。"></li>
+        <li data-ko="모든 AI 지원: 챗GPT, 제미니, 코파일럿, 클로드 등 주요 서비스는 물론, 다양한 기타 LLM 목록까지 지원합니다."
+            data-en="Supports All AIs: Natively supports major services like ChatGPT, Gemini, Copilot, Claude, and many other LLMs."
+            data-ja="すべてのAIをサポート：ChatGPT、Gemini、Copilot、Claudeなどの主要サービスはもちろん、他の多くのLLMもサポートしています。"
+            data-zh-cn="支持所有 AI：原生支持 ChatGPT、Gemini、Copilot、Claude 等主要服务以及许多其他 LLM。"
+            data-zh-tw="支援所有 AI：原生支援 ChatGPT、Gemini、Copilot、Claude 等主要服務以及許多其他 LLM。"></li>
+      </ul>
+    </div>
+
+    <!-- CTA 문구 -->
+    <p class="detail-desc" style="font-weight: 600;"
+      data-ko="지금 AI QuickLaunch를 설치하고, 당신만의 완벽한 '원클릭 AI 런처'를 만들어보세요!"
+      data-en="Install AI QuickLaunch now and build your perfect 'one-click AI launcher'!"
+      data-ja="今すぐAI QuickLaunchをインストールして、あなただけの完璧な「ワンクリックAIランチャー」を作りましょう！"
+      data-zh-cn="立即安装 AI QuickLaunch，打造您完美的“一键式 AI 启动器”！"
+      data-zh-tw="立即安裝 AI QuickLaunch，打造您完美的「一鍵式 AI 啟動器」！"></p>
+    
+    <!-- 다운로드 버튼 (style.css에 스타일 추가됨) -->
+    <div class="detail-actions">
+      <div class="store-btn-grid">
+        <!-- 1. 크롬 (활성화) -->
+        <a class="store-btn chrome" 
+           href="https://chromewebstore.google.com/detail/ai-quicklaunch/ekgdlllgbadbekaaafafgbaempgolioj?hl=ko&gl=US" 
+           target="_blank" rel="noopener">
+          <i class="fab fa-chrome"></i>
+          <span data-ko="Chrome에서 받기"
+                data-en="Get it on Chrome"
+                data-ja="Chromeで入手"
+                data-zh-cn="在 Chrome 上获取"
+                data-zh-tw="在 Chrome 上取得"></span>
+        </a>
+        
+        <!-- 2. 엣지 (비활성화) -->
+        <a class="store-btn edge disabled" href="#" aria-disabled="true">
+          <i class="fab fa-edge"></i>
+          <span data-ko="Edge에서 받기 (출시 예정)"
+                data-en="Get it on Edge (Coming Soon)"
+                data-ja="Edgeで入手 (近日公開)"
+                data-zh-cn="在 Edge 上获取 (即将推出)"
+                data-zh-tw="在 Edge 上取得 (即將推出)"></span>
+        </a>
+
+        <!-- 3. 파이어폭스 (비활성화) -->
+        <a class="store-btn firefox disabled" href="#" aria-disabled="true">
+          <i class="fab fa-firefox-browser"></i>
+          <span data-ko="Firefox에서 받기 (출시 예정)"
+                data-en="Get it on Firefox (Coming Soon)"
+                data-ja="Firefoxで入手 (近日公開)"
+                data-zh-cn="在 Firefox 上获取 (即将推出)"
+                data-zh-tw="在 Firefox 上取得 (即將推出)"></span>
+        </a>
+
+        <!-- 4. 웨일 (비활성화) -->
+        <a class="store-btn whale disabled" href="#" aria-disabled="true">
+          <i class="fas fa-water"></i> <!-- 웨일 아이콘이 없어서 물 아이콘으로 대체 -->
+          <span data-ko="Whale에서 받기 (출시 예정)"
+                data-en="Get it on Whale (Coming Soon)"
+                data-ja="Whaleで入手 (近日公開)"
+                data-zh-cn="在 Whale 上获取 (即将推出)"
+                data-zh-tw="在 Whale 上取得 (即將推出)"></span>
+        </a>
+      </div>
+    </div>
+
+    <footer>&copy; EATSTAR STUDIO 2025. All rights reserved.</footer>
+  </div>
+</body>
+</html>
+
