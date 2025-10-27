@@ -134,17 +134,17 @@ body {
 }
 
 /* New badges for AI QuickLaunch */
-.badge-htmlcss {
-  background: #e44d26;
+.badge-html {
+  background: #e34f26; /* HTML5 */
+  color: #fff;
+}
+.badge-css {
+  background: #1572b6; /* CSS3 */
   color: #fff;
 }
 .badge-js {
-  background: #f7df1e;
+  background: #f7df1e; /* JavaScript */
   color: #333;
-}
-.badge-extension {
-  background: #6a0dad;
-  color: #fff;
 }
 
 /* ===========================
