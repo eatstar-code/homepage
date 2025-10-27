@@ -312,6 +312,22 @@ footer {
 /* ===========================
    Responsive
 =========================== */
+/* === Google Play 배지 크기 - 전역 === */
+.google-play-btn img {
+  height: 56px;   /* 데스크톱 기본 */
+  width: auto;
+  display: block;
+  box-shadow: 0 6px 16px var(--shadow-color);
+  border-radius: 12px;
+}
+
+/* === Responsive === */
+@media (max-width: 960px) {
+  .google-play-btn img { height: 52px; }
+}
+@media (max-width: 720px) {
+  .google-play-btn img { height: 48px; }
+}
 @media (max-width: 560px) {
   .container { padding: 1.5rem 1rem; }
   .app-showcase { flex-direction: column; align-items: stretch; }
@@ -321,20 +337,6 @@ footer {
   .app-info p { font-size: .9rem; }
   .detail-title { font-size: 1.6rem; }
   .detail-desc { font-size: .95rem; max-width: 95%; }
-  .google-play-btn img {
-  height: 56px;      /* 데스크톱 기준 높이 */
-  width: auto;       /* 비율 유지 */
-  display: block;    /* 아래쪽 여백 제거 */
-}
-
-@media (max-width: 960px) {
-  .google-play-btn img { height: 52px; }
-}
-@media (max-width: 720px) {
-  .google-play-btn img { height: 48px; }
-}
-@media (max-width: 560px) {
   .google-play-btn img { height: 44px; } /* 작은 화면 */
-}
   .home-link { top: 14px; left: 14px; font-size: 1.5rem; }
 }
